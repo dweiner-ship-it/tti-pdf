@@ -1,1 +1,37 @@
-{`n    "name": "TTI PDF",`n    "short_name": "TTI PDF",`n    "description": "Free online PDF tools - Privacy-first PDF toolkit by TTI",`n    "start_url": "/",`n    "display": "standalone",`n    "background_color": "#000000",`n    "theme_color": "#2c2f76",`n    "orientation": "portrait-primary",`n    "icons": [`n        {`n            "src": "/images/tti-logo.svg",`n            "sizes": "any",`n            "type": "image/svg+xml",`n            "purpose": "any"`n        },`n        {`n            "src": "/images/favicon-192x192.png",`n            "sizes": "192x192",`n            "type": "image/png",`n            "purpose": "maskable any"`n        },`n        {`n            "src": "/images/favicon-512x512.png",`n            "sizes": "512x512",`n            "type": "image/png",`n            "purpose": "maskable any"`n        }`n    ],`n    "categories": [`n        "productivity",`n        "utilities",`n        "privacy",`n        "pdf"`n    ],`n    "screenshots": []`n}
+{
+    "name": "TTI PDF",
+    "short_name": "TTI PDF",
+    "description": "Free online PDF tools - Privacy-first PDF toolkit by TTI",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2c2f76",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/images/tti-logo.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "/images/favicon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/images/favicon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable any"
+        }
+    ],
+    "categories": [
+        "productivity",
+        "utilities",
+        "privacy",
+        "pdf"
+    ],
+    "screenshots": []
+}

@@ -59,16 +59,16 @@ html {
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background-color: #0b0d18;
-  color: #d1d5db;
+  background-color: #f9fafb;
+  color: #1f2937;
 }
 
 .tool-card {
   transition:
     transform 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
-  border: 1px solid #374151;
-  background-color: #1f2937;
+  border: 1px solid #e5e7eb;
+  background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 0.5rem;
   display: flex;
@@ -80,8 +80,8 @@ body {
 .tool-card:hover {
   transform: translateY(-5px);
   box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.3),
-    0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    0 10px 15px -3px rgba(0, 0, 0, 0.08),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   border-color: var(--tti-lime);
 }
 
@@ -98,7 +98,7 @@ body {
   cursor: pointer;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #111827;
   text-align: left;
 }
 
@@ -206,7 +206,7 @@ input[type='file']::file-selector-button {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -259,9 +259,9 @@ input[type='file']::file-selector-button {
   min-width: 0;
   overflow: auto;
   height: 75vh;
-  border: 2px solid #374151;
+  border: 2px solid #e5e7eb;
   border-radius: 0.5rem;
-  background-color: #1f2937;
+  background-color: #ffffff;
 }
 
 /* This rule ensures canvases in side-by-side panels display at their natural rendered size. */
@@ -324,20 +324,21 @@ footer a {
 }
 
 .feature-card {
-  background-color: #1f2937;
-  /* bg-gray-800 */
+  background-color: #ffffff;
+  /* bg-white light */
   padding: 24px;
   border-radius: 8px;
   /* rounded-lg */
   text-align: center;
+  border: 1px solid #e5e7eb;
 }
 
 .nav-link {
-  @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors;
+  @apply text-gray-600 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors;
 }
 
 .mobile-nav-link {
-  @apply text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors;
+  @apply text-gray-600 hover:bg-gray-100 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-colors;
 }
 
 .marker-slanted {
@@ -412,7 +413,7 @@ footer a {
 .solid-spinner {
   width: 64px;
   height: 64px;
-  border: 5px solid #374151;
+  border: 5px solid #e5e7eb;
   border-bottom-color: var(--tti-lime);
   border-right-color: var(--tti-navy-2);
   border-radius: 50%;
@@ -478,12 +479,12 @@ footer a {
 
 /* Testimonial Card Styles */
 .testimonial-card {
-  background-color: #1f2937;
-  /* bg-gray-800 */
+  background-color: #ffffff;
+  /* bg-white light */
   padding: 24px;
   border-radius: 0.75rem;
   /* rounded-xl */
-  border: 1px solid #374151;
+  border: 1px solid #e5e7eb;
   /* border-gray-700 */
   display: flex;
   flex-direction: column;
@@ -680,8 +681,8 @@ button:disabled,
   z-index: -1;
   background-size: 60px 60px;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
   -webkit-mask-image: radial-gradient(
     ellipse at center,
