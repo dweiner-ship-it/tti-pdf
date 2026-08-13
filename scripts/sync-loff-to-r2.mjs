@@ -68,6 +68,7 @@ for (const f of files) {
       localPath,
       '--content-type',
       contentType,
+      '--remote',
     ],
     { cwd: ROOT, stdio: 'inherit', shell: true }
   );
