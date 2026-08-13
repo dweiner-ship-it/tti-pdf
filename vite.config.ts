@@ -382,7 +382,7 @@ function flattenPagesPlugin(): Plugin {
         }
       }
 
-      if (process.env.SIMPLE_MODE === 'true' && bundle['simple-index.html']) {
+      if (process.env.SIMPLE_MODE !== 'false' && bundle['simple-index.html']) {
         moves.push({ from: 'simple-index.html', to: 'index.html' });
       }
 
@@ -475,7 +475,7 @@ export default defineConfig(() => {
         partialDirectory: resolve(__dirname, 'src/partials'),
         context: {
           baseUrl: (process.env.BASE_URL || '/').replace(/\/?$/, '/'),
-          simpleMode: process.env.SIMPLE_MODE === 'true',
+          simpleMode: process.env.SIMPLE_MODE !== 'false',
           brandName: process.env.VITE_BRAND_NAME || '',
           brandLogo: process.env.VITE_BRAND_LOGO || '',
           footerText: process.env.VITE_FOOTER_TEXT || '',
@@ -520,7 +520,7 @@ export default defineConfig(() => {
       }),
     ],
     define: {
-      __SIMPLE_MODE__: JSON.stringify(process.env.SIMPLE_MODE === 'true'),
+      __SIMPLE_MODE__: JSON.stringify(process.env.SIMPLE_MODE !== 'false'),
       __BRAND_NAME__: JSON.stringify(process.env.VITE_BRAND_NAME || ''),
       __DISABLED_TOOLS__: JSON.stringify(
         (process.env.DISABLE_TOOLS || '')
@@ -558,7 +558,7 @@ export default defineConfig(() => {
       rollupOptions: {
         input: {
           main:
-            process.env.SIMPLE_MODE === 'true'
+            process.env.SIMPLE_MODE !== 'false'
               ? resolve(__dirname, 'simple-index.html')
               : resolve(__dirname, 'index.html'),
           about: resolve(__dirname, 'about.html'),
