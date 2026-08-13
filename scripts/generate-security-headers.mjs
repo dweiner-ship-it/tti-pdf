@@ -1,9 +1,20 @@
 #!/usr/bin/env node
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
+// Load .env.production so VITE_LIBREOFFICE_BASE_URL is available when run via `node scripts/...` outside Vite
+for (const f of ['.env.production', '.env']) {
+  const p = join(repoRoot, f);
+  if (!existsSync(p)) continue;
+  for (const line of readFileSync(p, 'utf8').split('\n')) {
+    const m = line.match(/^\s*VITE_[A-Z0-9_]+\s*=\s*(.*)\s*$/);
+    if (!m) continue;
+    const k = line.match(/^\s*(VITE_[A-Z0-9_]+)\s*=/)[1];
+    if (!process.env[k]) process.env[k] = m[1].trim();
+  }
+}
 
 function originOf(urlStr) {
   if (!urlStr) return null;
@@ -29,11 +40,13 @@ const DEFAULT_CORS_PROXY_ORIGIN =
   'https://bentopdf-cors-proxy.bentopdf.workers.dev';
 const DEFAULT_OCR_FONT_CDN_ORIGIN = 'https://rawcdn.githack.com';
 
+const libreOfficeOrigin = originOf(process.env.VITE_LIBREOFFICE_BASE_URL);
 const wasmOrigins = [
   originOf(process.env.VITE_WASM_PYMUPDF_URL) || DEFAULT_WASM_ORIGINS.pymupdf,
   originOf(process.env.VITE_WASM_GS_URL) || DEFAULT_WASM_ORIGINS.gs,
   originOf(process.env.VITE_WASM_CPDF_URL) || DEFAULT_WASM_ORIGINS.cpdf,
-];
+  libreOfficeOrigin,
+].filter(Boolean);
 
 const tesseractOrigins = uniq([
   originOf(process.env.VITE_TESSERACT_WORKER_URL),
@@ -48,12 +61,15 @@ const ocrFontOrigin =
   originOf(process.env.VITE_OCR_FONT_BASE_URL) || DEFAULT_OCR_FONT_CDN_ORIGIN;
 
 const scriptOrigins = uniq([...wasmOrigins, ...tesseractOrigins]);
-const connectOrigins = uniq([
-  ...wasmOrigins,
-  ...tesseractOrigins,
-  corsProxyOrigin,
-  ocrFontOrigin,
-]);
+const connectOrigins = uniq(
+  [
+    ...wasmOrigins,
+    ...tesseractOrigins,
+    libreOfficeOrigin,
+    corsProxyOrigin,
+    ocrFontOrigin,
+  ].filter(Boolean)
+);
 const fontOrigins = uniq([ocrFontOrigin].filter(Boolean));
 
 const directives = [

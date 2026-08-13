@@ -8,7 +8,15 @@
 import { WorkerBrowserConverter } from '@matbee/libreoffice-converter/browser';
 import type { InputFormat } from '@matbee/libreoffice-converter/browser';
 
-const LIBREOFFICE_LOCAL_PATH = import.meta.env.BASE_URL + 'libreoffice-wasm/';
+function resolveLibreOfficeBasePath(): string {
+  const remote = (
+    import.meta.env.VITE_LIBREOFFICE_BASE_URL as string | undefined
+  )?.trim();
+  if (remote) return remote.endsWith('/') ? remote : `${remote}/`;
+  return `${import.meta.env.BASE_URL}libreoffice-wasm/`;
+}
+
+const LIBREOFFICE_LOCAL_PATH = resolveLibreOfficeBasePath();
 
 export interface LoadProgress {
   phase: 'loading' | 'initializing' | 'converting' | 'complete' | 'ready';
