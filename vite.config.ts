@@ -224,6 +224,7 @@ function buildCorsProxyAllowedHosts(): Set<string> {
     process.env.VITE_TESSERACT_CORE_URL,
     process.env.VITE_TESSERACT_LANG_URL,
     process.env.VITE_OCR_FONT_BASE_URL,
+    process.env.VITE_LIBREOFFICE_BASE_URL,
   ];
   for (const raw of envHostSources) {
     if (!raw) continue;

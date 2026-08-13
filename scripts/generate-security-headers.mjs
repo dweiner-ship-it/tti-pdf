@@ -29,11 +29,13 @@ const DEFAULT_CORS_PROXY_ORIGIN =
   'https://bentopdf-cors-proxy.bentopdf.workers.dev';
 const DEFAULT_OCR_FONT_CDN_ORIGIN = 'https://rawcdn.githack.com';
 
+const libreOfficeOrigin = originOf(process.env.VITE_LIBREOFFICE_BASE_URL);
 const wasmOrigins = [
   originOf(process.env.VITE_WASM_PYMUPDF_URL) || DEFAULT_WASM_ORIGINS.pymupdf,
   originOf(process.env.VITE_WASM_GS_URL) || DEFAULT_WASM_ORIGINS.gs,
   originOf(process.env.VITE_WASM_CPDF_URL) || DEFAULT_WASM_ORIGINS.cpdf,
-];
+  libreOfficeOrigin,
+].filter(Boolean);
 
 const tesseractOrigins = uniq([
   originOf(process.env.VITE_TESSERACT_WORKER_URL),
@@ -48,12 +50,15 @@ const ocrFontOrigin =
   originOf(process.env.VITE_OCR_FONT_BASE_URL) || DEFAULT_OCR_FONT_CDN_ORIGIN;
 
 const scriptOrigins = uniq([...wasmOrigins, ...tesseractOrigins]);
-const connectOrigins = uniq([
-  ...wasmOrigins,
-  ...tesseractOrigins,
-  corsProxyOrigin,
-  ocrFontOrigin,
-]);
+const connectOrigins = uniq(
+  [
+    ...wasmOrigins,
+    ...tesseractOrigins,
+    libreOfficeOrigin,
+    corsProxyOrigin,
+    ocrFontOrigin,
+  ].filter(Boolean)
+);
 const fontOrigins = uniq([ocrFontOrigin].filter(Boolean));
 
 const directives = [

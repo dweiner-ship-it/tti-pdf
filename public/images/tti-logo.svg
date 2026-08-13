@@ -1,0 +1,10 @@
+<svg width="166" height="166" viewBox="0 0 166 166" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TTI PDF logo">
+  <rect width="166" height="166" rx="32" fill="#1e1b4b"/>
+  <!-- Bento-inspired stacked shape in TTI indigo -->
+  <g transform="translate(40,18)">
+    <path d="M56.7848 62.9116L0 7.6211L24.8434 -16.5685C26.8037 -18.4772 29.9814 -18.4772 31.9414 -16.5685L85.177 35.2662L56.7848 62.9116Z" fill="#818CF8"/>
+    <path d="M-1.3e-05 62.7335L21.2939 83.467L42.5878 62.7335L21.2939 42L-1.3e-05 62.7335Z" fill="#E0E7FF"/>
+    <path d="M56.7848 65L81.6279 89.19C83.5881 91.098 83.5881 94.192 81.6279 96.101L28.3925 147.936L0 120.29L56.7848 65Z" fill="#6366F1"/>
+  </g>
+  <text x="83" y="148" text-anchor="middle" font-family="DM Sans, Inter, sans-serif" font-size="16" font-weight="800" fill="white" letter-spacing="1.5">TTI PDF</text>
+</svg>

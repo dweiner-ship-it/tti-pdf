@@ -13,7 +13,8 @@ dist-ssr
 *.local
 .npm-cache
 .env
-.env.production
+# .env.production is tracked for TTI PDF branding (required for Pages build)
+!.env.production
 .env.local
 
 # Editor directories and files
