@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary Meta Tags -->
-    <title>PDF Tools</title>
-    <meta name="title" content="PDF Tools" />
+    <title>TTI PDF - Free Online PDF Tools | Privacy-First</title>
+    <meta
+      name="title"
+      content="TTI PDF - Free Online PDF Tools | Privacy-First"
+    />
     <meta
       name="description"
       content="Free online PDF tools - Merge, split, compress, convert PDFs. 100% browser-based, no signup required, unlimited files."
     />
+    <meta name="author" content="TTI PDF" />
 
     <!-- Mobile Web App -->
     <meta name="mobile-web-app-capable" content="yes" />
@@ -19,7 +23,10 @@
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <meta name="apple-mobile-web-app-title" content="PDF Tools" />
+    <meta name="apple-mobile-web-app-title" content="TTI PDF" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
@@ -46,24 +53,21 @@
   </head>
 
   <body class="antialiased">
-    <!-- Simple Mode Navbar -->
+    <!-- Simple Mode Navbar — TTi branded (black + navy/lime) -->
     <nav
-      class="bg-gray-800 border-b border-gray-700 sticky top-0 z-30"
+      class="bg-black border-b border-[#2c2f76]/30 sticky top-0 z-30"
       data-simple-nav="true"
     >
       <div class="container mx-auto px-4">
         <div class="flex justify-start items-center h-16">
           <div class="flex-shrink-0 flex items-center cursor-pointer">
-            <img
-              src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/favicon-no-bg.svg{{/if}}"
-              alt="{{#if brandName}}{{brandName}}{{else}}Bento PDF{{/if}} Logo"
-              class="h-8 w-8"
-            />
-            <span class="text-white font-bold text-xl ml-2">
-              <a href="/"
-                >{{#if brandName}}{{brandName}}{{else}}BentoPDF{{/if}}</a
-              >
-            </span>
+            <a href="{{baseUrl}}" class="flex items-center" aria-label="Home">
+              <img
+                src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/tti-wordmark.svg{{/if}}"
+                alt="{{#if brandName}}{{brandName}}{{else}}TTI PDF{{/if}} Logo"
+                class="h-8 md:h-9 w-auto"
+              />
+            </a>
           </div>
         </div>
       </div>
@@ -89,7 +93,7 @@
             <input
               type="text"
               id="search-bar"
-              class="w-full pl-10 pr-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+              class="w-full pl-10 pr-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-[#9ece67] focus:border-[#2c2f76]"
               placeholder="Search for a tool (e.g., 'split', 'organize'...)"
               data-i18n-placeholder="tools.searchPlaceholder"
             />
@@ -123,7 +127,7 @@
       >
         <button
           id="back-to-grid"
-          class="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-6 font-semibold"
+          class="flex items-center gap-2 text-[#9ece67] hover:text-[#2c2f76] mb-6 font-semibold"
         >
           <i data-lucide="arrow-left" class="cursor-pointer"></i>
           <span class="cursor-pointer" data-i18n="tools.backToTools">
@@ -166,7 +170,7 @@
           </p>
           <button
             id="alert-ok"
-            class="btn bg-indigo-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-indigo-700"
+            class="btn bg-[#2c2f76] text-white font-semibold py-2 px-6 rounded-lg hover:bg-[#2c2f76]/90 border border-[#9ece67]/20"
           >
             OK
           </button>
@@ -185,7 +189,7 @@
             <div class="flex gap-4">
               <button
                 id="preview-download-btn"
-                class="btn bg-indigo-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-indigo-700"
+                class="btn bg-[#2c2f76] text-white font-semibold py-2 px-6 rounded-lg hover:bg-[#2c2f76]/90 border border-[#9ece67]/30"
               >
                 Download as PDF
               </button>
@@ -212,16 +216,16 @@
       <!-- Scroll to Top Button -->
       <button
         id="scroll-to-top-btn"
-        class="fixed bottom-12 right-8 bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 opacity-0 translate-y-10 invisible z-40"
+        class="fixed bottom-12 right-8 bg-[#2c2f76] hover:bg-[#2c2f76]/90 text-white p-3 rounded-full shadow-lg transition-all duration-300 opacity-0 translate-y-10 invisible z-40 border border-[#9ece67]/30"
         aria-label="Scroll to top"
       >
         <i data-lucide="arrow-up" class="w-6 h-6"></i>
       </button>
     </div>
 
-    <!-- Simple mode footer -->
+    <!-- Simple mode footer — TTi branded -->
     <footer
-      class="mt-16 border-t-2 border-gray-700 py-8"
+      class="mt-16 border-t border-[#2c2f76]/20 bg-black py-8"
       data-simple-footer="true"
     >
       <div class="container mx-auto px-4">
@@ -229,16 +233,16 @@
           <div>
             <div class="flex items-center mb-2">
               <img
-                src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/favicon.svg{{/if}}"
-                alt="{{#if brandName}}{{brandName}}{{else}}Bento PDF{{/if}} Logo"
-                class="h-8 w-8 mr-2"
+                src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/tti-wordmark.svg{{/if}}"
+                alt="{{#if brandName}}{{brandName}}{{else}}TTI PDF{{/if}} Logo"
+                class="h-7 w-auto mr-2"
               />
               <span class="text-white font-bold text-lg"
-                >{{#if brandName}}{{brandName}}{{else}}BentoPDF{{/if}}</span
+                >{{#if brandName}}{{brandName}}{{else}}TTI PDF{{/if}}</span
               >
             </div>
             <p class="text-gray-400 text-sm">
-              {{#if footerText}}{{footerText}}{{else}}&copy; 2026 BentoPDF. All
+              {{#if footerText}}{{footerText}}{{else}}&copy; 2026 TTI PDF. All
               rights reserved.{{/if}}
             </p>
             <p class="text-gray-500 text-xs mt-2">

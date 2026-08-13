@@ -1,20 +1,23 @@
-<footer class="mt-16 border-t-2 border-gray-700 py-8" data-simple-footer="true">
+<footer
+  class="mt-16 border-t border-[#2c2f76]/20 bg-black py-8"
+  data-simple-footer="true"
+>
   <div class="container mx-auto px-4">
     <div class="flex items-center justify-between flex-wrap gap-4">
       <div>
         <div class="flex items-center mb-2">
           <img
             id="footer-logo"
-            src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/favicon.svg{{/if}}"
-            alt="{{#if brandName}}{{brandName}}{{else}}Bento PDF{{/if}} Logo"
-            class="h-8 w-8 mr-2"
+            src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/tti-wordmark.svg{{/if}}"
+            alt="{{#if brandName}}{{brandName}}{{else}}TTI PDF{{/if}} Logo"
+            class="h-7 w-auto mr-2"
           />
           <span id="footer-brand" class="text-white font-bold text-lg"
-            >{{#if brandName}}{{brandName}}{{else}}BentoPDF{{/if}}</span
+            >{{#if brandName}}{{brandName}}{{else}}TTI PDF{{/if}}</span
           >
         </div>
         <p id="footer-copyright" class="text-gray-400 text-sm">
-          {{#if footerText}}{{footerText}}{{else}}&copy; 2026 BentoPDF. All
+          {{#if footerText}}{{footerText}}{{else}}&copy; 2026 TTI PDF. All
           rights reserved.{{/if}}
         </p>
         <p class="text-gray-500 text-xs mt-2">
