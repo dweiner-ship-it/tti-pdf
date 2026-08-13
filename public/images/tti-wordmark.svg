@@ -1,0 +1,21 @@
+<svg width="420" height="80" viewBox="0 0 420 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TTi Health Research & Economics">
+  <!-- TTi — navy TT, lime i -->
+  <g font-family="'DM Sans', Inter, system-ui, sans-serif" font-weight="800">
+    <text x="0" y="58" font-size="66" letter-spacing="-3" fill="#343B8C">TT<tspan fill="#B7D235">i</tspan></text>
+    <circle cx="99.2" cy="10.2" r="8.2" fill="#C5E14B"/>
+    <circle cx="99.2" cy="10.2" r="8.2" fill="#B7D235" opacity="0.98"/>
+  </g>
+  <!-- HEALTH RESEARCH -->
+  <text x="116" y="32" font-family="'DM Sans', Inter, system-ui, sans-serif" font-size="17.5" font-weight="700" letter-spacing="1.8" fill="#343B8C">HEALTH RESEARCH</text>
+  <!-- & ECONOMICS — & in lime, ECONOMICS with lime O accent -->
+  <g font-family="'DM Sans', Inter, system-ui, sans-serif" font-size="17.5" font-weight="700" letter-spacing="1.8">
+    <text x="116" y="57" fill="#B7D235">&amp;</text>
+    <text x="134" y="57" fill="#343B8C">ECON</text>
+    <!-- stylized O with lime gap like brand -->
+    <g transform="translate(212,42)">
+      <circle r="8.2" fill="none" stroke="#B7D235" stroke-width="2.4"/>
+      <circle r="8.2" fill="none" stroke="#B7D235" stroke-width="2.4" stroke-dasharray="36 14" stroke-dashoffset="8" opacity="1"/>
+    </g>
+    <text x="222.5" y="57" fill="#343B8C">MICS</text>
+  </g>
+</svg>
