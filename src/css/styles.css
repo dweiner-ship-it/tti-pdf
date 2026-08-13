@@ -48,12 +48,12 @@ html {
   scroll-behavior: smooth;
 }
 
-/* TTI brand palette — matches TTi Health Research & Economics lockup */
+/* TTI brand palette — exact vectors from TTi_FullLogo_Color.ai */
 :root {
-  --tti-navy: #2e3380;
-  --tti-navy-2: #343b8c;
-  --tti-lime: #b7d235;
-  --tti-lime-2: #c5e14b;
+  --tti-navy: #2c2f76;
+  --tti-navy-2: #2c2f76;
+  --tti-lime: #9ece67;
+  --tti-lime-2: #9ece67;
   --tti-black: #000000;
 }
 
@@ -197,7 +197,7 @@ body {
 
 /* Custom file input — TTI navy */
 input[type='file']::file-selector-button {
-  @apply bg-[#343B8C] text-white font-semibold py-2 px-4 rounded-lg cursor-pointer hover:bg-[#2e3380] transition-colors duration-200 mr-4;
+  @apply bg-[#2c2f76] text-white font-semibold py-2 px-4 rounded-lg cursor-pointer hover:bg-[#2c2f76] transition-colors duration-200 mr-4;
 }
 
 /* Custom scrollbar */
