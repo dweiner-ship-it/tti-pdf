@@ -1,9 +1,20 @@
 #!/usr/bin/env node
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
+// Load .env.production so VITE_LIBREOFFICE_BASE_URL is available when run via `node scripts/...` outside Vite
+for (const f of ['.env.production', '.env']) {
+  const p = join(repoRoot, f);
+  if (!existsSync(p)) continue;
+  for (const line of readFileSync(p, 'utf8').split('\n')) {
+    const m = line.match(/^\s*VITE_[A-Z0-9_]+\s*=\s*(.*)\s*$/);
+    if (!m) continue;
+    const k = line.match(/^\s*(VITE_[A-Z0-9_]+)\s*=/)[1];
+    if (!process.env[k]) process.env[k] = m[1].trim();
+  }
+}
 
 function originOf(urlStr) {
   if (!urlStr) return null;
