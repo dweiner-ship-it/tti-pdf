@@ -1,7 +1,7 @@
 {
-    "name": "TTI PDF",
-    "short_name": "TTI PDF",
-    "description": "Free online PDF tools - Privacy-first PDF toolkit by TTI",
+    "name": "TTi Secure PDF Editor",
+    "short_name": "TTi PDF",
+    "description": "Free online PDF tools - Privacy-first PDF toolkit by TTi",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",

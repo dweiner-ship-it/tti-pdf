@@ -135,7 +135,7 @@ body {
   border-left: none;
   border-right: none;
   border-top: none;
-  border-bottom: 1px solid #1f2937;
+  border-bottom: 1px solid #e5e7eb;
   background-color: transparent;
   align-items: center;
   justify-content: flex-start;
@@ -149,6 +149,7 @@ body {
   margin-bottom: 0;
   margin-right: 0.75rem;
   font-size: 1.25rem;
+  color: var(--tti-navy);
 }
 
 .compact-mode .tool-card i.ph {
@@ -160,6 +161,15 @@ body {
 .compact-mode .tool-card h3 {
   font-size: 0.875rem;
   font-weight: 500;
+  color: #111827;
+}
+
+.tool-card h3 {
+  color: #111827;
+}
+
+.tool-card p {
+  color: #6b7280;
 }
 
 .compact-mode .tool-card p {
@@ -169,8 +179,8 @@ body {
 .compact-mode .tool-card:hover {
   transform: none;
   box-shadow: none;
-  background-color: #1f2937;
-  border-color: #1f2937;
+  background-color: #f3f4f6;
+  border-color: #e5e7eb;
 }
 
 @media (min-width: 640px) {
@@ -293,15 +303,13 @@ footer a {
 }
 
 .pill {
-  background-color: #374151;
-  /* bg-gray-700 */
-  color: #d1d5db;
-  /* text-gray-300 */
+  background-color: #ffffff;
+  color: #374151;
   padding: 8px 16px;
   border-radius: 9999px;
-  /* rounded-full */
   font-size: 14px;
   font-weight: 500;
+  border: 1px solid #e5e7eb;
 }
 
 .cta-button {
@@ -400,7 +408,7 @@ footer a {
   box-shadow:
     0 0 0 2px #111827,
     0 0 0 4px #818cf8;
-  /* focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-indigo-400 */
+  /* focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-400 */
 }
 
 .btn-gradient:disabled {
@@ -485,28 +493,25 @@ footer a {
   border-radius: 0.75rem;
   /* rounded-xl */
   border: 1px solid #e5e7eb;
-  /* border-gray-700 */
+  /* border-gray-200 */
   display: flex;
   flex-direction: column;
 }
 
 .pill {
-  background-color: #374151;
-  /* bg-gray-700 */
-  color: #d1d5db;
-  /* text-gray-300 */
+  background-color: #ffffff;
+  color: #374151;
   padding: 8px 16px;
   border-radius: 9999px;
-  /* rounded-full */
   font-size: 14px;
   font-weight: 500;
+  border: 1px solid #e5e7eb;
 }
 
 .pill {
-  background-color: #374151;
-  /* bg-gray-700 */
-  color: #d1d5db;
-  /* text-gray-300 */
+  background-color: #ffffff;
+  color: #374151;
+  border: 1px solid #e5e7eb;
   /* Smaller padding and font size by default for mobile */
   padding: 6px 12px;
   font-size: 12px;
@@ -553,7 +558,7 @@ footer a {
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
-  color: white;
+  color: #111827;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
@@ -562,7 +567,7 @@ footer a {
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 600;
-  color: rgb(129 140 248);
+  color: #2c2f76;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
 }
@@ -570,7 +575,7 @@ footer a {
 .legal-content p {
   margin-bottom: 1rem;
   line-height: 1.625;
-  color: rgb(156 163 175);
+  color: #4b5563;
 }
 
 .legal-content ul {
@@ -578,16 +583,16 @@ footer a {
   list-style-position: inside;
   margin-bottom: 1rem;
   padding-left: 1rem;
-  color: rgb(156 163 175);
+  color: #4b5563;
 }
 
 .legal-content a {
-  color: rgb(129 140 248);
+  color: #2c2f76;
   text-decoration: underline;
 }
 
 .legal-content a:hover {
-  color: rgb(165 180 252);
+  color: #1e2155;
 }
 
 details > summary {
@@ -630,11 +635,11 @@ button:disabled,
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
   line-height: 1;
-  color: #e5e7eb;
-  background-color: #374151;
-  border: 1px solid #4b5563;
+  color: #374151;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 0.25rem;
-  box-shadow: 0 1px 0 0 #1f2937;
+  box-shadow: 0 1px 0 0 #e5e7eb;
 }
 
 .shortcut-input {
@@ -656,16 +661,16 @@ button:disabled,
 }
 
 #shortcuts-list::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: #f1f5f9;
 }
 
 #shortcuts-list::-webkit-scrollbar-thumb {
-  background: #4b5563;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 
 #shortcuts-list::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  background: #94a3b8;
 }
 
 /* Scroll to Top Button Visibility */

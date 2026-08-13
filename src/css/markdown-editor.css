@@ -559,7 +559,6 @@
 
 /* Print Styles */
 @media print {
-
   /* Reset all backgrounds, margins, and padding */
   html,
   body {
@@ -584,23 +583,23 @@
   nav,
   footer,
   #back-to-tools,
-  .bg-gray-800>h1.text-2xl,
-  .bg-gray-800>p.text-gray-400,
-  #markdown-editor-container~h1,
-  #markdown-editor-container~p {
+  .bg-white > h1.text-2xl,
+  .bg-white > p.text-gray-500,
+  #markdown-editor-container ~ h1,
+  #markdown-editor-container ~ p {
     display: none !important;
   }
 
   .min-h-screen,
   .max-w-7xl,
-  .bg-gray-800,
+  .bg-white,
   .rounded-xl,
   .shadow-xl,
   .p-6,
   .py-8,
   .px-4,
   #markdown-editor-container,
-  [class*="container"] {
+  [class*='container'] {
     padding: 0 !important;
     margin: 0 !important;
     background: white !important;
@@ -658,8 +657,8 @@
     page-break-after: avoid;
   }
 
-  .md-editor-preview>h1:first-child,
-  .md-editor-preview>*:first-child {
+  .md-editor-preview > h1:first-child,
+  .md-editor-preview > *:first-child {
     margin-top: 0 !important;
   }
 

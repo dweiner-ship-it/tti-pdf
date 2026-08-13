@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary Meta Tags -->
-    <title>TTI PDF - Free Online PDF Tools | Privacy-First</title>
-    <meta
-      name="title"
-      content="TTI PDF - Free Online PDF Tools | Privacy-First"
-    />
+    <title>TTi Secure PDF Editor</title>
+    <meta name="title" content="TTi Secure PDF Editor" />
     <meta
       name="description"
       content="Free online PDF tools - Merge, split, compress, convert PDFs. 100% browser-based, no signup required, unlimited files."
@@ -23,7 +20,7 @@
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <meta name="apple-mobile-web-app-title" content="TTI PDF" />
+    <meta name="apple-mobile-web-app-title" content="TTi Secure PDF Editor" />
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/site.webmanifest" />
@@ -63,7 +60,7 @@
           <div class="flex-shrink-0 flex items-center cursor-pointer">
             <a href="{{baseUrl}}" class="flex items-center" aria-label="Home">
               <img
-                src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/tti-wordmark.svg{{/if}}"
+                src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/tti-mark.svg{{/if}}"
                 alt="{{#if brandName}}{{brandName}}{{else}}TTI PDF{{/if}} Logo"
                 class="h-8 md:h-9 w-auto"
               />
@@ -88,7 +85,7 @@
         <div class="mb-8 max-w-lg mx-auto">
           <div class="relative">
             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-              <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+              <i data-lucide="search" class="w-5 h-5 text-gray-500"></i>
             </span>
             <input
               type="text"
@@ -106,7 +103,7 @@
               ></kbd>
               <button
                 id="open-shortcuts-btn"
-                class="p-1 hover:bg-gray-100 rounded-md text-gray-400 hover:text-gray-700 transition-colors"
+                class="p-1 hover:bg-gray-100 rounded-md text-gray-500 hover:text-gray-700 transition-colors"
                 title="Keyboard Shortcuts"
               >
                 <i data-lucide="settings" class="w-4 h-4"></i>
@@ -179,7 +176,7 @@
 
       <div
         id="preview-modal"
-        class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-40 p-4"
+        class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-40 p-4"
       >
         <div
           class="bg-white text-black rounded-lg shadow-xl w-full max-w-4xl h-[90vh] flex flex-col"
@@ -233,7 +230,7 @@
           <div>
             <div class="flex items-center mb-2">
               <img
-                src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/tti-wordmark.svg{{/if}}"
+                src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/tti-mark.svg{{/if}}"
                 alt="{{#if brandName}}{{brandName}}{{else}}TTI PDF{{/if}} Logo"
                 class="h-7 w-auto mr-2"
               />

@@ -58,20 +58,20 @@
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
   </head>
 
-  <body class="antialiased bg-gray-900">
+  <body class="antialiased bg-[#f9fafb]">
     {{> navbar }}
 
     <div
       id="uploader"
-      class="min-h-screen flex flex-col items-center justify-start py-12 p-4 bg-gray-900"
+      class="min-h-screen flex flex-col items-center justify-start py-12 p-4 bg-[#f9fafb]"
     >
       <div
         id="tool-uploader"
-        class="bg-gray-800 rounded-xl shadow-xl px-4 py-8 md:p-8 max-w-2xl w-full text-gray-200 border border-gray-700"
+        class="bg-white rounded-xl shadow-xl px-4 py-8 md:p-8 max-w-2xl w-full text-gray-700 border border-gray-200"
       >
         <button
           id="back-to-tools"
-          class="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-6 font-semibold"
+          class="flex items-center gap-2 text-indigo-600 hover:text-indigo-700 mb-6 font-semibold"
         >
           <i data-lucide="arrow-left" class="cursor-pointer"></i>
           <span class="cursor-pointer" data-i18n="tools.backToTools">
@@ -80,13 +80,13 @@
         </button>
 
         <h1
-          class="text-2xl font-bold text-white mb-2"
+          class="text-2xl font-bold text-gray-900 mb-2"
           data-i18n="tools:wasmSettings.title"
         >
           Advanced Features Settings
         </h1>
         <p
-          class="text-gray-400 mb-6"
+          class="text-gray-500 mb-6"
           data-i18n="tools:wasmSettings.description"
         >
           Configure external processing modules to enable advanced PDF features.
@@ -120,12 +120,12 @@
 
         <!-- PyMuPDF Section -->
         <div class="space-y-6">
-          <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
+          <div class="bg-white/50 rounded-lg p-4 border border-gray-300">
             <div class="flex items-center justify-between mb-3">
               <div>
-                <h3 class="font-semibold text-white">PyMuPDF</h3>
+                <h3 class="font-semibold text-gray-900">PyMuPDF</h3>
                 <p
-                  class="text-xs text-gray-400"
+                  class="text-xs text-gray-500"
                   data-i18n="tools:wasmSettings.pymupdfSubtitle"
                 >
                   Document Processing Engine
@@ -133,14 +133,14 @@
               </div>
               <span
                 id="pymupdf-status"
-                class="text-xs px-2 py-1 rounded-full bg-gray-600 text-gray-300"
+                class="text-xs px-2 py-1 rounded-full bg-gray-600 text-gray-600"
                 data-i18n="tools:wasmSettings.status.notConfigured"
               >
                 Not Configured
               </span>
             </div>
             <p
-              class="text-sm text-gray-400 mb-3"
+              class="text-sm text-gray-500 mb-3"
               data-i18n="tools:wasmSettings.pymupdfFeatures"
             >
               Enables: PDF to Text, Markdown, SVG, DOCX, Excel • Extract
@@ -151,11 +151,11 @@
                 type="text"
                 id="pymupdf-url"
                 placeholder="https://your-cdn.com/pymupdf-wasm/"
-                class="flex-1 bg-gray-700 border border-gray-600 text-white rounded-lg p-2.5 text-sm"
+                class="flex-1 bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 text-sm"
               />
               <button
                 id="pymupdf-test"
-                class="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded-lg text-sm font-medium transition-colors"
+                class="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-gray-900 rounded-lg text-sm font-medium transition-colors"
                 data-i18n="tools:wasmSettings.testButton"
               >
                 Test
@@ -168,12 +168,12 @@
                 >Recommended:</span
               >
               <code
-                class="text-xs text-indigo-400 bg-gray-800 px-2 py-1 rounded flex-1 truncate"
+                class="text-xs text-indigo-600 bg-white px-2 py-1 rounded flex-1 truncate"
                 >https://cdn.jsdelivr.net/npm/@bentopdf/pymupdf-wasm@0.11.16/</code
               >
               <button
                 data-copy="https://cdn.jsdelivr.net/npm/@bentopdf/pymupdf-wasm@0.11.16/"
-                class="copy-btn p-1.5 bg-gray-600 hover:bg-gray-500 rounded text-gray-300 hover:text-white transition-colors"
+                class="copy-btn p-1.5 bg-gray-600 hover:bg-gray-500 rounded text-gray-600 hover:text-gray-900 transition-colors"
                 title="Copy to clipboard"
                 data-i18n-title="tools:wasmSettings.copyTitle"
               >
@@ -183,12 +183,12 @@
           </div>
 
           <!-- Ghostscript Section -->
-          <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
+          <div class="bg-white/50 rounded-lg p-4 border border-gray-300">
             <div class="flex items-center justify-between mb-3">
               <div>
-                <h3 class="font-semibold text-white">Ghostscript</h3>
+                <h3 class="font-semibold text-gray-900">Ghostscript</h3>
                 <p
-                  class="text-xs text-gray-400"
+                  class="text-xs text-gray-500"
                   data-i18n="tools:wasmSettings.ghostscriptSubtitle"
                 >
                   PDF/A Conversion Engine
@@ -196,14 +196,14 @@
               </div>
               <span
                 id="ghostscript-status"
-                class="text-xs px-2 py-1 rounded-full bg-gray-600 text-gray-300"
+                class="text-xs px-2 py-1 rounded-full bg-gray-600 text-gray-600"
                 data-i18n="tools:wasmSettings.status.notConfigured"
               >
                 Not Configured
               </span>
             </div>
             <p
-              class="text-sm text-gray-400 mb-3"
+              class="text-sm text-gray-500 mb-3"
               data-i18n="tools:wasmSettings.ghostscriptFeatures"
             >
               Enables: PDF/A-1b, PDF/A-2b, PDF/A-3b Conversion • Font to Outline
@@ -213,11 +213,11 @@
                 type="text"
                 id="ghostscript-url"
                 placeholder="https://your-cdn.com/ghostscript-wasm/"
-                class="flex-1 bg-gray-700 border border-gray-600 text-white rounded-lg p-2.5 text-sm"
+                class="flex-1 bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 text-sm"
               />
               <button
                 id="ghostscript-test"
-                class="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded-lg text-sm font-medium transition-colors"
+                class="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-gray-900 rounded-lg text-sm font-medium transition-colors"
                 data-i18n="tools:wasmSettings.testButton"
               >
                 Test
@@ -230,12 +230,12 @@
                 >Recommended:</span
               >
               <code
-                class="text-xs text-indigo-400 bg-gray-800 px-2 py-1 rounded flex-1 truncate"
+                class="text-xs text-indigo-600 bg-white px-2 py-1 rounded flex-1 truncate"
                 >https://cdn.jsdelivr.net/npm/@bentopdf/gs-wasm@0.1.1/assets/</code
               >
               <button
                 data-copy="https://cdn.jsdelivr.net/npm/@bentopdf/gs-wasm@0.1.1/assets/"
-                class="copy-btn p-1.5 bg-gray-600 hover:bg-gray-500 rounded text-gray-300 hover:text-white transition-colors"
+                class="copy-btn p-1.5 bg-gray-600 hover:bg-gray-500 rounded text-gray-600 hover:text-gray-900 transition-colors"
                 title="Copy to clipboard"
                 data-i18n-title="tools:wasmSettings.copyTitle"
               >
@@ -245,12 +245,12 @@
           </div>
 
           <!-- CPDF Section -->
-          <div class="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
+          <div class="bg-white/50 rounded-lg p-4 border border-gray-300">
             <div class="flex items-center justify-between mb-3">
               <div>
-                <h3 class="font-semibold text-white">CoherentPDF</h3>
+                <h3 class="font-semibold text-gray-900">CoherentPDF</h3>
                 <p
-                  class="text-xs text-gray-400"
+                  class="text-xs text-gray-500"
                   data-i18n="tools:wasmSettings.cpdfSubtitle"
                 >
                   Bookmarks & Metadata Engine
@@ -258,14 +258,14 @@
               </div>
               <span
                 id="cpdf-status"
-                class="text-xs px-2 py-1 rounded-full bg-gray-600 text-gray-300"
+                class="text-xs px-2 py-1 rounded-full bg-gray-600 text-gray-600"
                 data-i18n="tools:wasmSettings.status.notConfigured"
               >
                 Not Configured
               </span>
             </div>
             <p
-              class="text-sm text-gray-400 mb-3"
+              class="text-sm text-gray-500 mb-3"
               data-i18n="tools:wasmSettings.cpdfFeatures"
             >
               Enables: Split by Bookmarks • Edit Bookmarks • PDF Metadata
@@ -275,11 +275,11 @@
                 type="text"
                 id="cpdf-url"
                 placeholder="https://your-cdn.com/cpdf/"
-                class="flex-1 bg-gray-700 border border-gray-600 text-white rounded-lg p-2.5 text-sm"
+                class="flex-1 bg-white border border-gray-300 text-gray-900 rounded-lg p-2.5 text-sm"
               />
               <button
                 id="cpdf-test"
-                class="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded-lg text-sm font-medium transition-colors"
+                class="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-gray-900 rounded-lg text-sm font-medium transition-colors"
                 data-i18n="tools:wasmSettings.testButton"
               >
                 Test
@@ -292,12 +292,12 @@
                 >Recommended:</span
               >
               <code
-                class="text-xs text-indigo-400 bg-gray-800 px-2 py-1 rounded flex-1 truncate"
+                class="text-xs text-indigo-600 bg-white px-2 py-1 rounded flex-1 truncate"
                 >https://cdn.jsdelivr.net/npm/coherentpdf@2.5.5/dist/</code
               >
               <button
                 data-copy="https://cdn.jsdelivr.net/npm/coherentpdf@2.5.5/dist/"
-                class="copy-btn p-1.5 bg-gray-600 hover:bg-gray-500 rounded text-gray-300 hover:text-white transition-colors"
+                class="copy-btn p-1.5 bg-gray-600 hover:bg-gray-500 rounded text-gray-600 hover:text-gray-900 transition-colors"
                 title="Copy to clipboard"
                 data-i18n-title="tools:wasmSettings.copyTitle"
               >
@@ -326,12 +326,10 @@
         </div>
 
         <!-- License Notice -->
-        <div
-          class="mt-6 p-4 bg-gray-700/30 rounded-lg border border-gray-600/50"
-        >
+        <div class="mt-6 p-4 bg-white/30 rounded-lg border border-gray-300/50">
           <p class="text-xs text-gray-500">
             <strong
-              class="text-gray-400"
+              class="text-gray-500"
               data-i18n="tools:wasmSettings.licenseTitle"
               >License Notice:</strong
             >
@@ -351,15 +349,15 @@
     <!-- Loader Modal -->
     <div
       id="loader-modal"
-      class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+      class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
     >
       <div
-        class="bg-gray-800 p-8 rounded-lg flex flex-col items-center gap-4 border border-gray-700 shadow-xl"
+        class="bg-white p-8 rounded-lg flex flex-col items-center gap-4 border border-gray-200 shadow-xl"
       >
         <div class="solid-spinner"></div>
         <p
           id="loader-text"
-          class="text-white text-lg font-medium"
+          class="text-gray-900 text-lg font-medium"
           data-i18n="loader.processing"
         >
           Processing...
@@ -370,19 +368,19 @@
     <!-- Alert Modal -->
     <div
       id="alert-modal"
-      class="fixed inset-0 bg-gray-900 bg-opacity-90 flex items-center justify-center z-50 hidden"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden"
     >
       <div
-        class="bg-gray-800 rounded-lg shadow-xl p-6 max-w-sm w-full border border-gray-700"
+        class="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full border border-gray-200"
       >
         <h3
           id="alert-title"
-          class="text-xl font-bold text-white mb-2"
+          class="text-xl font-bold text-gray-900 mb-2"
           data-i18n="alert.title"
         >
           Alert
         </h3>
-        <p id="alert-message" class="text-gray-300 mb-6"></p>
+        <p id="alert-message" class="text-gray-600 mb-6"></p>
         <button
           id="alert-ok"
           class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"

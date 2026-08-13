@@ -1,10 +1,17 @@
-// Logic for PDF Editor Page
+// Logic for PDF Editor Page — Annotate + Edit Text (pdf-lib whiteout+redraw)
 import { createIcons, icons } from 'lucide';
 import { showAlert, showLoader, hideLoader } from '../ui.js';
 import { formatBytes, downloadFile } from '../utils/helpers.js';
 import { makeUniqueFileKey } from '../utils/deduplicate-filename.js';
 import { batchDecryptIfNeeded } from '../utils/password-prompt.js';
 import { getEditorDisabledCategories } from '../utils/disabled-tools.js';
+import {
+  mountTextEditLayer,
+  applyFindReplace,
+  buildEditedPdf,
+  hasTextEdits,
+  clearTextEdits,
+} from '../utils/edit-text-overlay.js';
 
 const embedPdfWasmUrl = new URL(
   'embedpdf-snippet/dist/pdfium.wasm',
@@ -20,21 +27,39 @@ let isViewerInitialized = false;
 let currentFileName = 'document.pdf';
 const fileEntryMap = new Map<string, HTMLElement>();
 
+// Text-edit state
+let textModeActive = false;
+let currentPdfBytes: Uint8Array | null = null;
+let textLayerMountedFor: string | null = null; // fileName guard
+
 function resetViewer() {
   const pdfWrapper = document.getElementById('embed-pdf-wrapper');
   const pdfContainer = document.getElementById('embed-pdf-container');
   const downloadBtn = document.getElementById('download-edited-pdf');
   const fileDisplayArea = document.getElementById('file-display-area');
   const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const modeBar = document.getElementById('mode-toggle-bar');
+  const textWrapper = document.getElementById('text-edit-wrapper');
+  const textContainer = document.getElementById('text-edit-container');
   if (pdfContainer) pdfContainer.textContent = '';
   if (pdfWrapper) pdfWrapper.classList.add('hidden');
   if (downloadBtn) downloadBtn.classList.add('hidden');
   if (fileDisplayArea) fileDisplayArea.innerHTML = '';
   if (fileInput) fileInput.value = '';
+  if (modeBar) modeBar.classList.add('hidden');
+  if (textWrapper) textWrapper.classList.add('hidden');
+  if (textContainer) textContainer.innerHTML = '';
+  try {
+    clearTextEdits();
+  } catch {}
+  currentPdfBytes = null;
+  textLayerMountedFor = null;
+  textModeActive = false;
   viewerInstance = null;
   docManagerPlugin = null;
   isViewerInitialized = false;
   fileEntryMap.clear();
+  syncModeButtons();
 }
 
 function removeFileEntry(documentId: string) {
@@ -45,6 +70,65 @@ function removeFileEntry(documentId: string) {
   }
   if (fileEntryMap.size === 0) {
     resetViewer();
+  }
+}
+
+function syncModeButtons() {
+  const annotateBtn = document.getElementById('mode-annotate-btn');
+  const textBtn = document.getElementById('mode-text-btn');
+  if (!annotateBtn || !textBtn) return;
+  if (textModeActive) {
+    textBtn.className =
+      'px-3 py-1.5 text-sm font-medium rounded-md bg-[#2c2f76] text-white transition-colors';
+    annotateBtn.className =
+      'px-3 py-1.5 text-sm font-medium rounded-md text-gray-600 hover:bg-white transition-colors';
+  } else {
+    annotateBtn.className =
+      'px-3 py-1.5 text-sm font-medium rounded-md bg-[#2c2f76] text-white transition-colors';
+    textBtn.className =
+      'px-3 py-1.5 text-sm font-medium rounded-md text-gray-600 hover:bg-white transition-colors';
+  }
+}
+
+function setMode(mode: 'annotate' | 'text') {
+  textModeActive = mode === 'text';
+  const pdfWrapper = document.getElementById('embed-pdf-wrapper');
+  const textWrapper = document.getElementById('text-edit-wrapper');
+  const downloadBtn = document.getElementById('download-edited-pdf');
+  syncModeButtons();
+  if (textModeActive) {
+    pdfWrapper?.classList.add('hidden');
+    downloadBtn?.classList.add('hidden');
+    textWrapper?.classList.remove('hidden');
+    // lazily mount if we have bytes
+    void ensureTextLayer();
+  } else {
+    textWrapper?.classList.add('hidden');
+    if (isViewerInitialized) {
+      pdfWrapper?.classList.remove('hidden');
+      downloadBtn?.classList.remove('hidden');
+    }
+  }
+}
+
+async function ensureTextLayer() {
+  if (!currentPdfBytes) return;
+  const container = document.getElementById(
+    'text-edit-container'
+  ) as HTMLElement | null;
+  if (!container) return;
+  // avoid remounting same file repeatedly
+  const guard = currentFileName + ':' + currentPdfBytes.byteLength;
+  if (textLayerMountedFor === guard && container.childElementCount > 0) return;
+  showLoader('Preparing text layer…');
+  try {
+    await mountTextEditLayer(currentPdfBytes, container, 1.5);
+    textLayerMountedFor = guard;
+  } catch (err) {
+    console.error('mountTextEditLayer failed', err);
+    showAlert('Error', 'Failed to prepare text editing layer.');
+  } finally {
+    hideLoader();
   }
 }
 
@@ -91,6 +175,62 @@ function initializePage() {
   document.getElementById('back-to-tools')?.addEventListener('click', () => {
     window.location.href = import.meta.env.BASE_URL;
   });
+
+  // Mode toggle
+  document
+    .getElementById('mode-annotate-btn')
+    ?.addEventListener('click', () => setMode('annotate'));
+  document
+    .getElementById('mode-text-btn')
+    ?.addEventListener('click', () => setMode('text'));
+
+  // Find/Replace
+  document.getElementById('replace-all-btn')?.addEventListener('click', () => {
+    const container = document.getElementById(
+      'text-edit-container'
+    ) as HTMLElement | null;
+    const find =
+      (document.getElementById('find-input') as HTMLInputElement)?.value || '';
+    const replace =
+      (document.getElementById('replace-input') as HTMLInputElement)?.value ||
+      '';
+    const matchCase =
+      (document.getElementById('match-case') as HTMLInputElement)?.checked ||
+      false;
+    if (!container) return;
+    if (!find) {
+      showAlert('Find', 'Enter text to find.');
+      return;
+    }
+    const n = applyFindReplace(container, find, replace, matchCase);
+    if (n === 0) showAlert('Replace', 'No matches found.');
+  });
+
+  // Download edited (text mode)
+  document
+    .getElementById('download-text-edits')
+    ?.addEventListener('click', async () => {
+      if (!currentPdfBytes) {
+        showAlert('No file', 'Upload a PDF first.');
+        return;
+      }
+      if (!hasTextEdits()) {
+        showAlert('No changes', 'Edit some text first (amber highlights).');
+        return;
+      }
+      showLoader('Building edited PDF…');
+      try {
+        const out = await buildEditedPdf(currentPdfBytes);
+        const blob = new Blob([out as BlobPart], { type: 'application/pdf' });
+        const base = currentFileName.replace(/\.pdf$/i, '');
+        downloadFile(blob, base + '_edited.pdf');
+      } catch (err) {
+        console.error('buildEditedPdf failed', err);
+        showAlert('Error', 'Failed to build edited PDF.');
+      } finally {
+        hideLoader();
+      }
+    });
 }
 
 async function handleFileUpload(e: Event) {
@@ -115,6 +255,7 @@ async function handleFiles(files: FileList) {
     const pdfWrapper = document.getElementById('embed-pdf-wrapper');
     const pdfContainer = document.getElementById('embed-pdf-container');
     const fileDisplayArea = document.getElementById('file-display-area');
+    const modeBar = document.getElementById('mode-toggle-bar');
 
     if (!pdfWrapper || !pdfContainer || !fileDisplayArea) return;
 
@@ -127,11 +268,19 @@ async function handleFiles(files: FileList) {
       return;
     }
 
-    if (!isViewerInitialized) {
-      const firstFile = decryptedFiles[0];
-      currentFileName = firstFile.name;
-      const firstBuffer = await firstFile.arrayBuffer();
+    // Keep bytes for text-edit mode (first file)
+    const firstFileForText = decryptedFiles[0];
+    currentFileName = firstFileForText.name;
+    const firstArrayBuf = await firstFileForText.arrayBuffer();
+    currentPdfBytes = new Uint8Array(firstArrayBuf.slice(0));
+    textLayerMountedFor = null;
+    // Use a fresh copy for embed viewer as well
+    const firstBufferForViewer = firstArrayBuf;
 
+    modeBar?.classList.remove('hidden');
+    syncModeButtons();
+
+    if (!isViewerInitialized) {
       pdfContainer.textContent = '';
       pdfWrapper.classList.remove('hidden');
 
@@ -144,7 +293,7 @@ async function handleFiles(files: FileList) {
         worker: true,
         wasmUrl: embedPdfWasmUrl,
         export: {
-          defaultFileName: firstFile.name,
+          defaultFileName: firstFileForText.name,
         },
         documentManager: {
           maxDocuments: 10,
@@ -168,7 +317,7 @@ async function handleFiles(files: FileList) {
           const docKey = data?.name;
           if (!docId) return;
           const pendingEntry = fileDisplayArea.querySelector(
-            `[data-pending-name="${CSS.escape(docKey)}"]`
+            `[data-pending-name="${CSS.escape(docKey || '')}"]`
           ) as HTMLElement;
           if (pendingEntry) {
             pendingEntry.removeAttribute('data-pending-name');
@@ -178,7 +327,7 @@ async function handleFiles(files: FileList) {
             ) as HTMLElement;
             if (removeBtn) {
               removeBtn.onclick = () => {
-                docManagerPlugin.closeDocument(docId);
+                docManagerPlugin!.closeDocument(docId);
               };
             }
           }
@@ -188,8 +337,8 @@ async function handleFiles(files: FileList) {
       addFileEntries(fileDisplayArea, decryptedFiles);
 
       docManagerPlugin.openDocumentBuffer({
-        buffer: firstBuffer,
-        name: makeUniqueFileKey(0, firstFile.name),
+        buffer: firstBufferForViewer,
+        name: makeUniqueFileKey(0, firstFileForText.name),
         autoActivate: true,
       });
 
@@ -235,17 +384,22 @@ async function handleFiles(files: FileList) {
           window.location.href = import.meta.env.BASE_URL;
         });
       }
+      // default to annotate mode
+      setMode('annotate');
     } else {
       addFileEntries(fileDisplayArea, decryptedFiles);
 
       for (let i = 0; i < decryptedFiles.length; i++) {
         const buffer = await decryptedFiles[i].arrayBuffer();
-        docManagerPlugin.openDocumentBuffer({
+        // keep currentPdfBytes as first of newest batch only if user wants; don't overwrite unless single
+        docManagerPlugin!.openDocumentBuffer({
           buffer,
           name: makeUniqueFileKey(i, decryptedFiles[i].name),
           autoActivate: true,
         });
       }
+      // if text mode was active, remount with new current file
+      if (textModeActive) await ensureTextLayer();
     }
   } catch (error) {
     console.error('Error loading PDF Editor:', error);
@@ -260,24 +414,24 @@ function addFileEntries(fileDisplayArea: HTMLElement, files: File[]) {
     const file = files[i];
     const fileDiv = document.createElement('div');
     fileDiv.className =
-      'flex items-center justify-between bg-gray-700 p-3 rounded-lg';
+      'flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200';
     fileDiv.setAttribute('data-pending-name', makeUniqueFileKey(i, file.name));
 
     const infoContainer = document.createElement('div');
     infoContainer.className = 'flex flex-col flex-1 min-w-0';
 
     const nameSpan = document.createElement('div');
-    nameSpan.className = 'truncate font-medium text-gray-200 text-sm mb-1';
+    nameSpan.className = 'truncate font-medium text-gray-900 text-sm mb-1';
     nameSpan.textContent = file.name;
 
     const metaSpan = document.createElement('div');
-    metaSpan.className = 'text-xs text-gray-400';
+    metaSpan.className = 'text-xs text-gray-500';
     metaSpan.textContent = formatBytes(file.size);
 
     infoContainer.append(nameSpan, metaSpan);
 
     const removeBtn = document.createElement('button');
-    removeBtn.className = 'ml-4 text-red-400 hover:text-red-300 flex-shrink-0';
+    removeBtn.className = 'ml-4 text-red-500 hover:text-red-600 flex-shrink-0';
     removeBtn.innerHTML = '<i data-lucide="trash-2" class="w-4 h-4"></i>';
     removeBtn.setAttribute('data-remove-btn', 'true');
     removeBtn.onclick = () => {

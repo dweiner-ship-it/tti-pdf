@@ -1,5 +1,5 @@
 {{#if simpleMode}} {{> footer-simple}} {{else}}
-<footer class="mt-16 border-t border-[#2c2f76]/20 py-10 bg-black">
+<footer class="mt-16 border-t border-gray-200 py-10 bg-white">
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
       <div class="mb-8 md:mb-0">
@@ -7,25 +7,25 @@
           <img
             id="footer-logo"
             src="{{baseUrl}}{{#if brandLogo}}{{brandLogo}}{{else}}images/favicon.svg{{/if}}"
-            alt="{{#if brandName}}{{brandName}}{{else}}Bento PDF{{/if}} Logo"
+            alt="{{#if brandName}}{{brandName}}{{else}}TTi Secure PDF Editor{{/if}} Logo"
             class="h-10 w-10 mr-3"
           />
-          <span id="footer-brand" class="text-xl font-bold text-white">{{#if brandName}}{{brandName}}{{else}}BentoPDF{{/if}}</span>
+          <span id="footer-brand" class="text-xl font-bold text-gray-900">{{#if brandName}}{{brandName}}{{else}}TTi Secure PDF Editor{{/if}}</span>
         </div>
-        <p id="footer-copyright" class="text-gray-400 text-sm" {{#unless footerText}}data-i18n="footer.copyright"{{/unless}}>
-          {{#if footerText}}{{footerText}}{{else}}&copy; 2026 BentoPDF. All rights reserved.{{/if}}
+        <p id="footer-copyright" class="text-gray-500 text-sm" {{#unless footerText}}data-i18n="footer.copyright"{{/unless}}>
+          {{#if footerText}}{{footerText}}{{else}}&copy; 2026 TTi Secure PDF Editor. All rights reserved.{{/if}}
         </p>
-        <p class="text-gray-400 text-xs mt-2">
+        <p class="text-gray-500 text-xs mt-2">
           <span data-i18n="footer.version">Version</span>
           <span id="app-version">{{appVersion}}</span>
         </p>
       </div>
 
       <div>
-        <h3 class="font-bold text-white mb-4" data-i18n="footer.company">
+        <h3 class="font-bold text-gray-900 mb-4" data-i18n="footer.company">
           Company
         </h3>
-        <ul class="space-y-2 text-gray-400">
+        <ul class="space-y-2 text-gray-500">
           <li>
             <a
               href="about.html"
@@ -54,10 +54,10 @@
       </div>
 
       <div>
-        <h3 class="font-bold text-white mb-4" data-i18n="footer.legal">
+        <h3 class="font-bold text-gray-900 mb-4" data-i18n="footer.legal">
           Legal
         </h3>
-        <ul class="space-y-2 text-gray-400">
+        <ul class="space-y-2 text-gray-500">
           <li>
             <a
               href="licensing.html"
@@ -91,7 +91,7 @@
       </div>
 
       <div>
-        <h3 class="font-bold text-white mb-4" data-i18n="footer.followUs">
+        <h3 class="font-bold text-gray-900 mb-4" data-i18n="footer.followUs">
           Follow Us
         </h3>
         <div class="flex justify-center md:justify-start space-x-4">
@@ -99,7 +99,7 @@
             href="https://github.com/alam00000/bentopdf"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-gray-400 hover:text-indigo-400"
+            class="text-gray-500 hover:text-indigo-400"
             title="GitHub"
           >
             <svg
@@ -119,7 +119,7 @@
             href="https://discord.gg/Bgq3Ay3f2w"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-gray-400 hover:text-indigo-400"
+            class="text-gray-500 hover:text-indigo-400"
             title="Discord"
           >
             <svg
@@ -137,7 +137,7 @@
             href="https://www.instagram.com/thebentopdf/"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-gray-400 hover:text-indigo-400"
+            class="text-gray-500 hover:text-indigo-400"
             title="Instagram"
           >
             <i data-lucide="instagram"></i>
@@ -146,14 +146,14 @@
             href="https://www.linkedin.com/company/bentopdf/"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-gray-400 hover:text-indigo-400"
+            class="text-gray-500 hover:text-indigo-400"
             title="LinkedIn"
           >
             <i data-lucide="linkedin"></i>
           </a>
           <a
             href="https://x.com/BentoPDF"
-            class="text-gray-400 hover:text-indigo-400"
+            class="text-gray-500 hover:text-indigo-400"
             title="X (Twitter)"
           >
             <svg
